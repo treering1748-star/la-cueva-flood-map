@@ -7,6 +7,7 @@ Interactive web map of the La Cueva erosion and runoff study area, Jemez Mountai
 ## Layers
 - 2024 Valles Caldera / Jemez Mountains bare-earth lidar (NV5 Geospatial, contracted by the U.S. Army Corps of Engineers, St. Louis District, and the National Park Service; acquired 22–28 Aug 2024): elevation + hillshade, 0.25 m hillshade, slope class
 - D8 drainage lines (contributing area ≥ 0.2 ha), 20 ft and 40 ft contours
+- Santa Fe National Forest boundary (NFS / private land) and land ownership (BLM Surface Management Agency)
 - Roads by ownership (NMDOT; names from NM911), Forest Service roads (USFS Region 3), NMDOT bridges
 - 16 geotagged field photos from the 27 October 2026 walk, with camera direction and walk-group context
 

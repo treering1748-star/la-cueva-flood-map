@@ -82,6 +82,12 @@ const LAYERS = [
     legend:SLOPE.map(s=>`<span class="sw" style="background:${s[0]}"></span><span>${s[1]}</span>`).join('')},
   // vectors
   {id:'photos', group:'vector', name:'Field photos (27 Oct 2026)', on:true, swClass:'dot', sw:'#e41a1c', make:()=>photosLayer()},
+  {id:'sfnf', group:'vector', name:'Santa Fe National Forest boundary', on:true, swClass:'line', sw:'#1a7a1a',
+    make:()=>getJSON('data/sfnf_boundary.geojson').then(g=>L.geoJSON(g,{pane:'lines',style:{color:'#1a7a1a',weight:3,dashArray:'9 6',opacity:.95},onEachFeature:(f,l)=>l.bindTooltip('Santa Fe National Forest boundary (National Forest / private land)',{sticky:true,className:'road-tip'})})),
+    legend:'<span class="ln" style="border-top:3px dashed #1a7a1a"></span><span>National Forest System land / private land</span>'},
+  {id:'ownership', group:'vector', name:'Land ownership', on:false, swClass:'', sw:'linear-gradient(90deg,rgba(120,190,120,.6) 50%,rgba(240,200,140,.6) 50%)',
+    make:()=>getJSON('data/ownership.geojson').then(g=>L.geoJSON(g,{pane:'lines',style:f=>({stroke:false,fillColor:f.properties.owner_code==='FS'?'#78be78':'#f0c88c',fillOpacity:.35}),onEachFeature:(f,l)=>l.bindTooltip(`${f.properties.owner} · ${fmt(f.properties.area_ac,0)} ac in map area`,{sticky:true,className:'road-tip'})})),
+    legend:'<span class="sw" style="background:rgba(120,190,120,.6)"></span><span>National Forest (USFS)</span><span class="sw" style="background:rgba(240,200,140,.6)"></span><span>Private</span>'},
   {id:'bridges', group:'vector', name:'Bridges (NMDOT)', on:true, swClass:'dot', sw:'#111',
     make:()=>getJSON('data/bridges.geojson').then(g=>L.geoJSON(g,{pane:'points',pointToLayer:(f,ll)=>L.marker(ll,{icon:L.divIcon({className:'',html:'<div style="width:12px;height:12px;background:#111;border:2px solid #fff;box-shadow:0 0 2px #000"></div>',iconSize:[12,12],iconAnchor:[6,6]})}),
       onEachFeature:(f,l)=>{const p=f.properties; l.bindPopup(`<b>Bridge ${esc(p.bin)}</b><br>${esc(p.route_id)}${p.milepost?' · MP '+p.milepost:''}<br>Owner: ${esc(p.owner)}<br>Length: ${fmt(p.length_ft,0)} ft · Condition: ${esc(p.condition)}`);}}))},
