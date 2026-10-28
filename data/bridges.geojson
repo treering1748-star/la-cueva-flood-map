@@ -1,0 +1,10 @@
+{
+"type": "FeatureCollection",
+"xy_coordinate_resolution": 1e-06,
+"features": [
+{ "type": "Feature", "properties": { "bin": "9497", "route_id": "LOC233270P", "milepost": null, "owner": "County", "length_ft": 80.7, "condition": "Good" }, "geometry": { "type": "Point", "coordinates": [ -106.643222, 35.87809 ] } },
+{ "type": "Feature", "properties": { "bin": "6856", "route_id": "NM4P", "milepost": 26.05, "owner": "State", "length_ft": 33.1, "condition": "Fair" }, "geometry": { "type": "Point", "coordinates": [ -106.638902, 35.865757 ] } },
+{ "type": "Feature", "properties": { "bin": "6999", "route_id": "NM126P", "milepost": 38.74, "owner": "State", "length_ft": 29.9, "condition": "Fair" }, "geometry": { "type": "Point", "coordinates": [ -106.638413, 35.86721 ] } },
+{ "type": "Feature", "properties": { "bin": "9005", "route_id": "LOC233184P", "milepost": null, "owner": "County", "length_ft": 30.0, "condition": "Fair" }, "geometry": { "type": "Point", "coordinates": [ -106.642547, 35.874232 ] } }
+]
+}

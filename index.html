@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>La Cueva Flood Study Map</title>
+<meta name="description" content="Interactive map of the La Cueva (Jemez Mountains, NM) flood and erosion study area: 2024 lidar terrain, slope, drainage, contours, roads, bridges and geotagged field photos from 27 October 2026.">
+<link rel="stylesheet" href="lib/leaflet/leaflet.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="map" aria-label="Map"></div>
+
+<aside id="panel" class="panel">
+  <header class="panel-head">
+    <div>
+      <h1>La Cueva Flood Study</h1>
+      <p class="sub">Jemez Mountains, New Mexico · lidar terrain, drainage &amp; field photos</p>
+    </div>
+    <button id="panelToggle" class="icon-btn" aria-label="Collapse panel" title="Collapse panel">‹</button>
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <button role="tab" class="tab active" data-tab="layers">Layers</button>
+    <button role="tab" class="tab" data-tab="photos">Photos</button>
+    <button role="tab" class="tab" data-tab="tools">Tools</button>
+    <button role="tab" class="tab" data-tab="about">About</button>
+  </nav>
+
+  <section class="tabpane active" id="tab-layers">
+    <h2>Background</h2>
+    <div id="baseList" class="list"></div>
+    <h2>Terrain (2024 lidar)</h2>
+    <div id="rasterList" class="list"></div>
+    <h2>Features</h2>
+    <div id="vectorList" class="list"></div>
+  </section>
+
+  <section class="tabpane" id="tab-photos">
+    <div class="row">
+      <input id="photoSearch" type="search" inputmode="numeric" placeholder="Go to photo ID (e.g. 120)" aria-label="Photo ID">
+      <button id="photoGo" class="btn">Go</button>
+    </div>
+    <h2>Walk groups</h2>
+    <p class="hint">Tap a group to show or hide its photos. Groups and descriptions are from Tina Trout's walk transcript.</p>
+    <div id="walkList" class="list"></div>
+    <div class="row gap">
+      <button id="walkAll" class="btn small">All</button>
+      <button id="walkNone" class="btn small">None</button>
+    </div>
+    <p class="hint" id="photoCount"></p>
+  </section>
+
+  <section class="tabpane" id="tab-tools">
+    <div class="toolgrid">
+      <button class="tool" data-tool="info"><b>Spot elevation</b><span>Tap the map for ground elevation and slope</span></button>
+      <button class="tool" data-tool="profile"><b>Elevation profile</b><span>Tap points along a line, double-tap to finish</span></button>
+      <button class="tool" data-tool="distance"><b>Measure distance</b><span>Tap points, double-tap to finish</span></button>
+      <button class="tool" data-tool="area"><b>Measure area</b><span>Tap corners, double-tap to finish</span></button>
+    </div>
+    <div class="row gap">
+      <button id="locateBtn" class="btn">◎ Show my location</button>
+      <button id="clearBtn" class="btn">Clear drawings</button>
+    </div>
+    <div id="toolOut" class="toolout"></div>
+    <div id="profileBox" class="profile" hidden></div>
+    <button id="shareBtn" class="btn">Copy link to this view</button>
+    <p class="hint" id="shareMsg"></p>
+  </section>
+
+  <section class="tabpane prose" id="tab-about">
+    <h2>About this map</h2>
+    <p>Study area for runoff, road drainage and erosion along the La Cueva corridor, Jemez Mountains, Sandoval County, New Mexico. The yellow outline is the study area; terrain layers cover its north–south bounding rectangle (3.3 × 3.9 km).</p>
+    <h3>Data</h3>
+    <ul>
+      <li><b>Terrain:</b> 2024 Jemez Mountains bare-earth lidar, 0.25 m (NAD83(2011) UTM 13N). Hillshade at 0.25 m; elevation colors from a 1 m DEM averaged from the lidar. Spot elevations and profiles use a 2 m grid.</li>
+      <li><b>Slope class:</b> percent slope from the 1 m DEM (lightly smoothed), classed 0–10, 10–15, 15–25, 25–30, &gt;30 %.</li>
+      <li><b>Drainage lines:</b> D8 flow routing on the depression-filled 1 m DEM; lines drawn where ≥0.2 ha drains through, classed by contributing area.</li>
+      <li><b>Contours:</b> 20 and 40 ft (US survey feet), from the 0.25 m DEM lightly smoothed.</li>
+      <li><b>Roads:</b> state, county, municipal and private ownership from NMDOT (names from NM911 centerlines); Forest Service roads from the USFS Southwestern Region road database (INFRA). <b>Bridges:</b> NMDOT bridge inventory (structures &gt;20 ft).</li>
+      <li><b>Photos:</b> 16 original geotagged photos selected from the 213 taken on 27 Oct 2026 during a field walk with Tina Trout; photo IDs are their positions (001–213) in the full walk sequence. Walk groups and descriptions come from her transcript; they are contextual labels, not technical diagnoses.</li>
+    </ul>
+    <h3>Limits</h3>
+    <ul>
+      <li>Photo points are camera GPS positions, not surveyed feature locations; recorded GPS error for these photos is 2.7–13.8 m (shown in each photo's details). Arrows show the camera direction.</li>
+      <li>Contributing areas are counted only inside the terrain rectangle; streams entering from outside carry more water than shown.</li>
+      <li>Culverts are not represented in the drainage model, so road fills act as dams; flow paths near roads may be wrong.</li>
+      <li>"Municipal" road ownership is as coded by NMDOT and has not been verified.</li>
+      <li>Not survey-grade. For planning and discussion only.</li>
+    </ul>
+    <h3>Credits</h3>
+    <p>Compiled by Thomas W. Swetnam, Jemez Mountains Tree-Ring Lab, October 2026, with analysis and mapping assistance from Claude (Anthropic). Base maps © Esri, USGS, OpenStreetMap contributors / OpenTopoMap.</p>
+  </section>
+</aside>
+
+<div id="viewer" class="viewer" hidden role="dialog" aria-modal="true" aria-labelledby="vTitle">
+  <div class="v-card">
+    <header class="v-head">
+      <h2 id="vTitle">Photo</h2>
+      <div class="v-nav">
+        <button id="vPrev" class="icon-btn" title="Previous photo (←)" aria-label="Previous photo">‹</button>
+        <button id="vNext" class="icon-btn" title="Next photo (→)" aria-label="Next photo">›</button>
+        <button id="vClose" class="icon-btn" title="Close (Esc)" aria-label="Close">✕</button>
+      </div>
+    </header>
+    <div class="v-body">
+      <div id="vImgWrap" class="v-img"></div>
+      <div id="vMeta" class="v-meta"></div>
+    </div>
+  </div>
+</div>
+
+<button id="panelOpen" class="panel-open" aria-label="Open panel" hidden>☰ Map panel</button>
+
+<script src="lib/leaflet/leaflet.js"></script>
+<script src="lib/proj4.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

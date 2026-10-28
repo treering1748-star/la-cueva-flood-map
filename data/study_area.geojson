@@ -1,0 +1,7 @@
+{
+"type": "FeatureCollection",
+"xy_coordinate_resolution": 1e-06,
+"features": [
+{ "type": "Feature", "properties": { "Name": "La Cueva Flood Study Area" }, "geometry": { "type": "Polygon", "coordinates": [ [ [ -106.667373, 35.885293, 0.0 ], [ -106.662026, 35.852719, 0.0 ], [ -106.630619, 35.85568, 0.0 ], [ -106.637217, 35.888525, 0.0 ], [ -106.667373, 35.885293, 0.0 ] ] ] } }
+]
+}
