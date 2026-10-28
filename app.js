@@ -82,8 +82,6 @@ const LAYERS = [
     legend:SLOPE.map(s=>`<span class="sw" style="background:${s[0]}"></span><span>${s[1]}</span>`).join('')},
   // vectors
   {id:'photos', group:'vector', name:'Field photos (27 Oct 2026)', on:true, swClass:'dot', sw:'#e41a1c', make:()=>photosLayer()},
-  {id:'study', group:'vector', name:'Study area', on:true, swClass:'line', sw:'#ffd700',
-    make:()=>getJSON('data/study_area.geojson').then(g=>L.geoJSON(g,{pane:'lines',interactive:false,style:{color:'#ffd700',weight:2.5,fill:false,dashArray:'6 4'}}))},
   {id:'bridges', group:'vector', name:'Bridges (NMDOT)', on:true, swClass:'dot', sw:'#111',
     make:()=>getJSON('data/bridges.geojson').then(g=>L.geoJSON(g,{pane:'points',pointToLayer:(f,ll)=>L.marker(ll,{icon:L.divIcon({className:'',html:'<div style="width:12px;height:12px;background:#111;border:2px solid #fff;box-shadow:0 0 2px #000"></div>',iconSize:[12,12],iconAnchor:[6,6]})}),
       onEachFeature:(f,l)=>{const p=f.properties; l.bindPopup(`<b>Bridge ${esc(p.bin)}</b><br>${esc(p.route_id)}${p.milepost?' · MP '+p.milepost:''}<br>Owner: ${esc(p.owner)}<br>Length: ${fmt(p.length_ft,0)} ft · Condition: ${esc(p.condition)}`);}}))},
