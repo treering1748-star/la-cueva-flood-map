@@ -50,7 +50,7 @@ let EDGES = new Set();
 const LidarLayer = L.TileLayer.extend({
   getTileUrl(c){ const k=`${c.z}/${c.x}/${c.y}`; return `tiles/${this.options.set}/${k}.${EDGES.has(k)?'png':'jpg'}`; }
 });
-const lidar = (set, opacity) => new LidarLayer('', {set, pane:'rasters', bounds:BOUNDS, minNativeZoom:12, maxNativeZoom:18, maxZoom:21, opacity, attribution:'2024 Jemez Mountains lidar'});
+const lidar = (set, opacity) => new LidarLayer('', {set, pane:'rasters', bounds:BOUNDS, minNativeZoom:12, maxNativeZoom:18, maxZoom:21, opacity, attribution:'2024 lidar: NV5 Geospatial for USFS &amp; NPS'});
 
 // ---------- vector styles ----------
 function roadLayer(url, style, label){

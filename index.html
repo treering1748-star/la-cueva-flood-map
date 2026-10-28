@@ -6,7 +6,7 @@
 <title>La Cueva Flood Study Map</title>
 <meta name="description" content="Interactive map of the La Cueva (Jemez Mountains, NM) flood and erosion study area: 2024 lidar terrain, slope, drainage, contours, roads, bridges and geotagged field photos from 27 October 2026.">
 <link rel="stylesheet" href="lib/leaflet/leaflet.css">
-<link rel="stylesheet" href="style.css?v=3">
+<link rel="stylesheet" href="style.css?v=4">
 </head>
 <body>
 <div id="map" aria-label="Map"></div>
@@ -73,7 +73,7 @@
     <p>Study area for runoff, road drainage and erosion along the La Cueva corridor, Jemez Mountains, Sandoval County, New Mexico. Terrain layers cover a 3.3 × 3.9 km rectangle around the study corridor.</p>
     <h3>Data</h3>
     <ul>
-      <li><b>Terrain:</b> 2024 Jemez Mountains bare-earth lidar, 0.25 m (NAD83(2011) UTM 13N). Hillshade at 0.25 m; elevation colors from a 1 m DEM averaged from the lidar. Spot elevations and profiles use a 2 m grid.</li>
+      <li><b>Terrain:</b> 2024 Valles Caldera / Jemez Mountains bare-earth lidar, 0.25 m DEM (full source below). Hillshade at 0.25 m; elevation colors from a 1 m DEM averaged from the lidar. Spot elevations and profiles use a 2 m grid.</li>
       <li><b>Slope class:</b> percent slope from the 1 m DEM (lightly smoothed), classed 0–10, 10–15, 15–25, 25–30, &gt;30 %.</li>
       <li><b>Drainage lines:</b> D8 flow routing on the depression-filled 1 m DEM; lines drawn where ≥0.2 ha drains through, classed by contributing area.</li>
       <li><b>Contours:</b> 20 and 40 ft (US survey feet), from the 0.25 m DEM lightly smoothed.</li>
@@ -88,6 +88,8 @@
       <li>"Municipal" road ownership is as coded by NMDOT and has not been verified.</li>
       <li>Not survey-grade. For planning and discussion only.</li>
     </ul>
+    <h3>Lidar source</h3>
+    <p>NV5 Geospatial (Corvallis, Oregon). 2024. <i>Valles Caldera, New Mexico: 2024 Lidar Technical Data Report</i>, October 30, 2024. Airborne near-infrared lidar acquired 22–28 August 2024 with a Riegl VQ-1460 sensor (Cessna Grand Caravan) over 301,886 contracted acres of the Valles Caldera National Preserve, Bandelier National Monument and the Santa Fe National Forest, Jemez Mountains. Data contracted by the U.S. Forest Service and the National Park Service; the contract was administered by the U.S. Army Corps of Engineers, St. Louis District. Average density 41.3 first-return points/m² and 8.5 ground points/m²; non-vegetated vertical accuracy 5.4 cm (95 % confidence) against the bare-earth DEM. Horizontal datum NAD83(2011), UTM Zone 13 North; vertical datum NAVD88 (Geoid18); units metres.</p>
     <h3>Credits</h3>
     <p>Compiled by Thomas W. Swetnam, Jemez Mountains Tree-Ring Lab, October 2026, with analysis and mapping assistance from Claude (Anthropic). Base maps © Esri, USGS, OpenStreetMap contributors / OpenTopoMap.</p>
   </section>
@@ -114,6 +116,6 @@
 
 <script src="lib/leaflet/leaflet.js"></script>
 <script src="lib/proj4.js"></script>
-<script src="app.js?v=3"></script>
+<script src="app.js?v=4"></script>
 </body>
 </html>
